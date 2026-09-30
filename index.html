@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="description" content="贪吃蛇小游戏 - 键盘方向键控制，支持暂停、重开与移动端触屏操作" />
+  <title>贪吃蛇 · Snake</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app__header">
+      <h1 class="app__title">贪吃蛇</h1>
+      <p class="app__subtitle">方向键 / WASD 控制移动 · 空格暂停 · 吃到食物得分</p>
+    </header>
+
+    <main class="layout">
+      <!-- ===== 游戏区 ===== -->
+      <section class="stage" aria-label="游戏区域">
+        <div class="hud">
+          <div class="hud__item">
+            <span class="hud__label">分数</span>
+            <span class="hud__value" id="score-value">0</span>
+          </div>
+          <div class="hud__item">
+            <span class="hud__label">最高分</span>
+            <span class="hud__value" id="best-value">0</span>
+          </div>
+          <div class="hud__item">
+            <span class="hud__label">长度</span>
+            <span class="hud__value" id="length-value">3</span>
+          </div>
+          <div class="hud__item">
+            <span class="hud__label">速度</span>
+            <span class="hud__value" id="speed-value">1</span>
+          </div>
+        </div>
+
+        <div class="board" id="board">
+          <canvas id="game-canvas" role="img" aria-label="贪吃蛇游戏画布"></canvas>
+
+          <div class="overlay is-visible" id="overlay" aria-live="polite">
+            <div class="overlay__card">
+              <p class="overlay__badge" id="overlay-badge">准备开始</p>
+              <h2 class="overlay__title" id="overlay-title">准备好了吗？</h2>
+              <p class="overlay__desc" id="overlay-desc">使用方向键控制蛇的移动，吃掉食物让身体变长。</p>
+              <button type="button" class="btn btn--primary" id="overlay-btn">开始游戏</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button type="button" class="btn btn--primary" id="primary-btn">开始游戏</button>
+          <button type="button" class="btn" id="restart-btn">重新开始</button>
+          <button type="button" class="btn btn--sound" id="sound-btn" aria-pressed="true">音效：开</button>
+        </div>
+
+        <!-- 触屏方向键（窄屏 / 触控设备显示） -->
+        <div class="dpad" id="dpad" aria-label="触屏方向键">
+          <button type="button" class="dpad__btn dpad__btn--up" data-dir="up" aria-label="向上">▲</button>
+          <button type="button" class="dpad__btn dpad__btn--left" data-dir="left" aria-label="向左">◀</button>
+          <button type="button" class="dpad__btn dpad__btn--down" data-dir="down" aria-label="向下">▼</button>
+          <button type="button" class="dpad__btn dpad__btn--right" data-dir="right" aria-label="向右">▶</button>
+        </div>
+      </section>
+
+      <!-- ===== 规则说明 ===== -->
+      <aside class="rules" aria-label="游戏规则说明">
+        <h2 class="rules__title">游戏规则</h2>
+        <ol class="rules__list">
+          <li class="rules__item">
+            <span class="rules__index">1</span>
+            <div>
+              <strong>移动控制</strong>
+              <p>使用 <kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd> 或 <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 改变方向，手机端可滑动屏幕或点击方向键。</p>
+            </div>
+          </li>
+          <li class="rules__item">
+            <span class="rules__index">2</span>
+            <div>
+              <strong>吃食物得分</strong>
+              <p>蛇头吃到红色果实即可得 <b>10 分</b>，身体长度增加 1 节，移动速度随之略微提升。</p>
+            </div>
+          </li>
+          <li class="rules__item">
+            <span class="rules__index">3</span>
+            <div>
+              <strong>死亡条件</strong>
+              <p>蛇头撞到墙壁或撞到自己的身体时，本局立即结束。</p>
+            </div>
+          </li>
+          <li class="rules__item">
+            <span class="rules__index">4</span>
+            <div>
+              <strong>暂停与重开</strong>
+              <p>按 <kbd>空格</kbd> 或点击“暂停”可随时中断游戏；点击“重新开始”立即重置本局。</p>
+            </div>
+          </li>
+        </ol>
+        <p class="rules__tip">小提示：蛇无法直接掉头，转弯前请提前规划路线。</p>
+      </aside>
+    </main>
+
+    <footer class="app__footer">用 Canvas 实现 · 逻辑 / 渲染 / 交互三层分离</footer>
+  </div>
+
+  <script src="js/game.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/input.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
