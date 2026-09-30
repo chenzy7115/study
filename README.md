@@ -319,7 +319,7 @@ refactor(input): 抽取滑动阈值常量
 ```
 MIT License
 
-Copyright (c) 2026 <你的名字>
+Copyright (c) 2026 <chenzy>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
